@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-box: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            overflow: hidden;
+            font-family: 'Orbitron', 'Segoe UI', 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Animated background gradient */
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 207, 255, 0.1) 0%, transparent 50%);
+            animation: pulse-bg 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        /* Animated tech lines */
+        .tech-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #00cfff, transparent);
+            height: 1px;
+            width: 100%;
+            animation: move-line 6s linear infinite;
+            opacity: 0.3;
+        }
+
+        .line:nth-child(1) {
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .line:nth-child(2) {
+            top: 50%;
+            animation-delay: 2s;
+        }
+
+        .line:nth-child(3) {
+            top: 80%;
+            animation-delay: 4s;
+        }
+
+        .vertical-line {
+            position: absolute;
+            background: linear-gradient(180deg, transparent, #00cfff, transparent);
+            width: 1px;
+            height: 100%;
+            animation: move-vertical 8s linear infinite;
+            opacity: 0.2;
+        }
+
+        .vertical-line:nth-child(4) {
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        .vertical-line:nth-child(5) {
+            left: 70%;
+            animation-delay: 3s;
+        }
+
+        /* Main content container */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Main heading with glow effect */
+        .main-heading {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: float 4s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+            text-shadow: 
+                0 0 10px #00cfff,
+                0 0 20px #00cfff,
+                0 0 30px #00cfff,
+                0 0 40px #00cfff,
+                0 0 50px #00cfff;
+        }
+
+        /* Subtext */
+        .subtext {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #00cfff;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            animation: fade-in-out 3s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(0, 207, 255, 0.5);
+        }
+
+        /* Small text */
+        .small-text {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: fade-in-out 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        /* Animated dots */
+        .dots {
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00cfff;
+            margin: 0 3px;
+            animation: dot-blink 1.5s infinite;
+            box-shadow: 0 0 10px #00cfff;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /* Decorative corner elements */
+        .corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00cfff;
+            opacity: 0.3;
+            animation: corner-glow 3s ease-in-out infinite;
+        }
+
+        .corner-tl {
+            top: 5%;
+            left: 5%;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: 5%;
+            right: 5%;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: 5%;
+            left: 5%;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: 5%;
+            right: 5%;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px #00cfff,
+                    0 0 20px #00cfff,
+                    0 0 30px #00cfff,
+                    0 0 40px #00cfff;
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px #00cfff,
+                    0 0 30px #00cfff,
+                    0 0 40px #00cfff,
+                    0 0 50px #00cfff,
+                    0 0 60px #00cfff,
+                    0 0 70px #00cfff;
+            }
+        }
+
+        @keyframes fade-in-out {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes move-line {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-vertical {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes dot-blink {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes corner-glow {
+            0%, 100% {
+                opacity: 0.2;
+                box-shadow: 0 0 5px #00cfff;
+            }
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 20px #00cfff;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .corner {
+                width: 60px;
+                height: 60px;
+            }
+
+            .main-heading {
+                letter-spacing: 0.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-gradient"></div>
+
+    <!-- Tech lines -->
+    <div class="tech-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="vertical-line"></div>
+        <div class="vertical-line"></div>
+    </div>
+
+    <!-- Corner decorations -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <h1 class="main-heading">COMING SOON</h1>
+        <p class="subtext">Something powerful is being built</p>
+        <p class="small-text">
+            Stay Tuned
+            <span class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </span>
+        </p>
+    </div>
+</body>
+</html>
